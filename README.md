@@ -70,31 +70,3 @@ The program uses the following environment variables for configuration:
     ```
 
 The server will start listening on the specified port and proxy requests to the configured URL.
-
-## Dockerfile
-
-Here's a sample `Dockerfile` for building the Docker image:
-
-```dockerfile
-# Use the official Golang image as the base image
-FROM golang:1.16-alpine
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the Go source code to the working directory
-COPY main.go .
-
-# Build the Go program
-RUN go build -o reverse-proxy main.go
-
-# Set environment variables for the container
-ENV PORT=8080
-ENV PROXY_URL=https://api.openai.com
-ENV EXT_PROXY_URL=http://10.0.0.8:8080
-
-# Expose the port the server will run on
-EXPOSE 8080
-
-# Command to run the executable
-CMD ["./reverse-proxy"]
